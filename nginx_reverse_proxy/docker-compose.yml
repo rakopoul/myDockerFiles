@@ -5,7 +5,7 @@ services:
     image: nginx
     container_name: server
     volumes:
-      - ./test.txt:/usr/share/nginx/html/test.txt
+      - ../test.txt:/usr/share/nginx/html/test.txt
       - ./nginx/logs/server/:/var/log/nginx/
     ports:
       - 9080:80
@@ -22,17 +22,3 @@ services:
       - 8080:80
     links:
       - nginx_server
- 
-  # Client
-  client: 
-    image: nginx
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: client
-    volumes:
-      - ./nginx/logs/client/:/var/log/nginx/
-    ports:
-      - 8081:80
-    links:
-      - nginx_proxy

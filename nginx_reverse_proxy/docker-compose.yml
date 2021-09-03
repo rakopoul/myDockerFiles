@@ -1,0 +1,38 @@
+version: '3'
+services:
+  # Nginx Server
+  nginx_server: 
+    image: nginx
+    container_name: server
+    volumes:
+      - ./test.txt:/usr/share/nginx/html/test.txt
+      - ./nginx/logs/server/:/var/log/nginx/
+    ports:
+      - 9080:80
+  
+  # Nginx proxy
+  nginx_proxy: 
+    image: nginx:1.19.3
+    container_name: proxy
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs/proxy/:/var/log/nginx/
+    ports:
+      - 8080:80
+    links:
+      - nginx_server
+ 
+  # Client
+  client: 
+    image: nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: client
+    volumes:
+      - ./nginx/logs/client/:/var/log/nginx/
+    ports:
+      - 8081:80
+    links:
+      - nginx_proxy

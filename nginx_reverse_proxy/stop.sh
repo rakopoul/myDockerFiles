@@ -3,4 +3,4 @@
 echo "Stopping server and proxy containers"
 docker-compose down
 echo "Deleting text files"
-rm -rf *.txt
+rm -rf test*

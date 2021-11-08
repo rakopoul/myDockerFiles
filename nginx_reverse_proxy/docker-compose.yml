@@ -1,16 +1,15 @@
 version: '3'
 services:
   # Payara Server
-  payara_server: 
-    image: payara/server-full
+  nginx_server: 
+    image: nginx
     container_name: server
     volumes:
-    #  - ./server.conf:/etc/nginx/conf.d/default.conf
-      - ./test1:/appserver/glassfish/domains/domain1/docroot/test1
-      - ./test2:/appserver/glassfish/domains/domain1/docroot/test2
-    #  - ./test2:/etc/nginx/html/test2
-    #  - ./nginx/logs/server/:/var/log/nginx/
-    #command: [nginx-debug, '-g', 'daemon off;']
+      - ./server.conf:/etc/nginx/conf.d/default.conf
+      - ./test1:/etc/nginx/html/test2
+      - ./test2:/etc/nginx/html/test2
+      - ./nginx/logs/server/:/var/log/nginx/
+    command: [nginx-debug, '-g', 'daemon off;']
     ports:
       - 9080:8080
   

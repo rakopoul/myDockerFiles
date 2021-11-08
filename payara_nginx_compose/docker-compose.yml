@@ -5,9 +5,9 @@ services:
     image: payara/server-full
     container_name: payara-server
     volumes:
-    #  - ./server.conf:/etc/nginx/conf.d/default.conf
-      - ./test1:/appserver/glassfish/domains/domain1/docroot/test1
-      - ./test2:/appserver/glassfish/domains/domain1/docroot/test2
+      - ./domain.xml:/opt/payara/appserver/glassfish/domains/domain1/config/domain.xml
+      - ./test1:/opt/payara/appserver/glassfish/domains/domain1/docroot/img/test1
+      - ./test2:/opt/payara/appserver/glassfish/domains/domain1/docroot/img/test2
     #  - ./test2:/etc/nginx/html/test2
     #  - ./nginx/logs/server/:/var/log/nginx/
     #command: [nginx-debug, '-g', 'daemon off;']

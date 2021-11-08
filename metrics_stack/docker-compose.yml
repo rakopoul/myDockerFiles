@@ -18,7 +18,7 @@ services:
       - influxdb
       - kafka
     volumes:
-      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf
   grafana:
     image: grafana/grafana:7.0.6
     container_name: grafana

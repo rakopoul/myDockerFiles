@@ -1,19 +1,5 @@
 version: '3'
 services:
-  # Payara Server
-  payara_server: 
-    image: payara/server-full
-    container_name: payara-server
-    volumes:
-      - ./domain.xml:/opt/payara/appserver/glassfish/domains/domain1/config/domain.xml
-      - ./test1:/opt/payara/appserver/glassfish/domains/domain1/docroot/img/test1
-      - ./test2:/opt/payara/appserver/glassfish/domains/domain1/docroot/img/test2
-    #  - ./test2:/etc/nginx/html/test2
-    #  - ./nginx/logs/server/:/var/log/nginx/
-    #command: [nginx-debug, '-g', 'daemon off;']
-    ports:
-      - 9080:8080
-  
   # Nginx proxy
   nginx_proxy: 
     image: nginx
@@ -23,8 +9,4 @@ services:
       - ./nginx/logs/proxy/:/var/log/nginx/
     command: [nginx-debug, '-g', 'daemon off;']
     ports:
-      - 8080:80
-    links:
-      - payara_server
-    depends_on:
-      - payara_server
+      - 9080:80
